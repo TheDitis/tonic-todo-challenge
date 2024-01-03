@@ -1,13 +1,15 @@
 import React from 'react';
-import { useTodos } from '../hooks/useTodos';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { TodoList } from './TodoList/TodoList';
 
 function App() {
-  const { todos } = useTodos();
   return (
     <div className="App">
-      {todos !== undefined &&
-        todos.map((todo) => <p key={todo.id}>{todo.text}</p>)}
+      <Routes>
+        <Route path="/" element={<TodoList />} />
+        {/* TODO: <Route path="/auth" element={<AuthPage/>}/>*/}
+      </Routes>
     </div>
   );
 }
