@@ -1,4 +1,4 @@
-import { Todo } from '../types/todo.types';
+import { CreateTodoDto, Todo } from '../types/todo.types';
 import { User } from '../types/user.types';
 
 export class DB {
@@ -77,6 +77,14 @@ export class DB {
     return await DB.call(path, 'GET');
   }
 
+  private static async mutate(
+    path: string | string[],
+    method: 'POST' | 'PUT' | 'PATCH' | 'DELETE',
+    payload: any,
+  ) {
+    return await DB.call(path, method, payload);
+  }
+
   // normally would use real auth or at least JWT, but there's no time
   static async getAllUsers() {
     const users = await DB.call('users', 'GET');
@@ -91,5 +99,17 @@ export class DB {
     const todos = await DB.get(['todos', DB.userId]);
     console.log('got todos: ', todos);
     return todos as Todo[];
+  }
+
+  static async createTodo(partialTodo: CreateTodoDto) {
+    if (!DB.userId) {
+      throw new Error('User not logged in');
+    }
+    const todo = await DB.mutate('todos', 'POST', {
+      ...partialTodo,
+      userId: DB.userId,
+    });
+    console.log('created todo: ', todo);
+    return todo as Todo;
   }
 }
