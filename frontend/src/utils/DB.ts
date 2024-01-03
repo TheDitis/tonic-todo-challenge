@@ -97,7 +97,6 @@ export class DB {
       ...partialTodo,
       userId: DB.userId,
     });
-    console.log('created todo: ', todo);
     return todo as Todo;
   }
 

@@ -17,7 +17,7 @@ export const NewTodoItemControl = ({ createTodo }: NewTodoItemControlProps) => {
           className="delay-1000"
           animation="duration-1000"
         >
-          <Button pill onClick={() => setText('')}>
+          <Button className="w-12 h-12" pill onClick={() => setText('')}>
             <Icon icon="mdi:plus" className="text-2xl" />
           </Button>
         </Tooltip>

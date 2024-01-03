@@ -28,19 +28,18 @@ export const AuthPage = () => {
   return (
     <Card>
       <h3 className="text-2xl font-semibold">Users</h3>
-      <p className="text-gray-900 dark:text-white">
-        Please select a user to login as:
-      </p>
-      <div>
+      <p>Please select a user to login as:</p>
+      <div className="space-y-1">
         {users.map((user) => (
           <Card
             className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 p-0.5"
+            theme={{ root: { children: 'p-3' } }}
             key={user.id}
             onClick={() => {
               login(user.username);
             }}
           >
-            {user.username}
+            <p>{user.username}</p>
           </Card>
         ))}
       </div>

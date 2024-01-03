@@ -25,7 +25,7 @@ export const TodoList = () => {
             />
           ))
         ) : (
-          <p className="text-gray-900 dark:text-white">No todos to show</p>
+          <p>No todos to show</p>
         )}
         <NewTodoItemControl createTodo={createTodo} />
       </div>
