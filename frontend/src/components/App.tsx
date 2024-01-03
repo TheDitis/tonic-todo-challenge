@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTodos } from '../hooks/useTodos';
 import './App.css';
-import { useTodos } from './hooks/useTodos';
 
 function App() {
   const { todos } = useTodos();
