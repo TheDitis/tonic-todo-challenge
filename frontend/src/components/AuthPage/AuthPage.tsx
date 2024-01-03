@@ -28,17 +28,20 @@ export const AuthPage = () => {
   return (
     <Card>
       <h3 className="text-2xl font-semibold">Users</h3>
+      <p className="text-gray-900 dark:text-white">
+        Please select a user to login as:
+      </p>
       <div>
         {users.map((user) => (
-          <div
-            className="cursor-pointer"
+          <Card
+            className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 p-0.5"
             key={user.id}
             onClick={() => {
               login(user.username);
             }}
           >
             {user.username}
-          </div>
+          </Card>
         ))}
       </div>
     </Card>
