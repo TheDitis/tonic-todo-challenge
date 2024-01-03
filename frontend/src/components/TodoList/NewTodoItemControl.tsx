@@ -24,6 +24,7 @@ export const NewTodoItemControl = ({ createTodo }: NewTodoItemControlProps) => {
       ) : (
         <>
           <TextInput
+            className="w-full"
             value={text}
             autoFocus
             onChange={(e) => setText(e.target.value)}

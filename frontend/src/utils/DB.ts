@@ -49,16 +49,6 @@ export class DB {
       path = path.split('/');
     }
     try {
-      console.log(
-        'making api call: ',
-        DB.endpoint +
-          '/' +
-          path.join('/') +
-          ' with method ' +
-          method +
-          ' and payload: ',
-        payload,
-      );
       const response = await fetch(DB.endpoint + '/' + path.join('/'), {
         method,
         headers: {
@@ -88,7 +78,6 @@ export class DB {
   // normally would use real auth or at least JWT, but there's no time
   static async getAllUsers() {
     const users = await DB.call('users', 'GET');
-    console.log('got users: ', users);
     return users as User[];
   }
 
@@ -97,7 +86,6 @@ export class DB {
       throw new Error('User not logged in');
     }
     const todos = await DB.get(['todos', DB.userId]);
-    console.log('got todos: ', todos);
     return todos as Todo[];
   }
 
@@ -109,7 +97,6 @@ export class DB {
       ...partialTodo,
       userId: DB.userId,
     });
-    console.log('created todo: ', todo);
     return todo as Todo;
   }
 

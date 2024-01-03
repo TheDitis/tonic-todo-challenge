@@ -9,7 +9,7 @@ export const TodoList = () => {
   const { logout } = useContext(UserContext);
   const { todos, createTodo, updateTodo, deleteTodo } = useTodos();
   return (
-    <Card className="relative">
+    <Card>
       <Button className="absolute top-0 right-0" onClick={logout}>
         Logout
       </Button>
