@@ -1,4 +1,5 @@
 import { Todo } from '../types/todo.types';
+import { User } from '../types/user.types';
 
 export class DB {
   // normally I would get this from env
@@ -42,6 +43,13 @@ export class DB {
 
   static async get(path: string | string[]) {
     return await DB.call(path, 'GET');
+  }
+
+  // normally would use real auth or at least JWT, but there's no time
+  static async getAllUsers() {
+    const users = await DB.call('users', 'GET');
+    console.log('got users: ', users);
+    return users as User[];
   }
 
   static async getTodos() {
