@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Spinner } from 'flowbite-react';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserProvider';
 import { DB } from '../../utils/DB';
 
 export const AuthPage = () => {
+  const { login } = useContext(UserContext);
   const { data: users, status } = useQuery({
     queryKey: ['users'],
     queryFn: DB.getAllUsers,
@@ -23,8 +26,21 @@ export const AuthPage = () => {
   }
 
   return (
-    <div>
-      <h1>AuthPage</h1>
-    </div>
+    <Card>
+      <h3 className="text-2xl font-semibold">Users</h3>
+      <div>
+        {users.map((user) => (
+          <div
+            className="cursor-pointer"
+            key={user.id}
+            onClick={() => {
+              login(user.username);
+            }}
+          >
+            {user.username}
+          </div>
+        ))}
+      </div>
+    </Card>
   );
 };
