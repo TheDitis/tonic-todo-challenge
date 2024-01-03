@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateTodoDto } from './create-todo.dto';
+import { PickType } from '@nestjs/mapped-types';
+import { Todo } from '../entities/todo.entity';
 
-export class UpdateTodoDto extends PartialType(CreateTodoDto) {}
+export class UpdateTodoDto extends PickType(Todo, [
+  'text',
+  'completed',
+] as const) {}
