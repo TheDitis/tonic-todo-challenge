@@ -24,6 +24,7 @@ export class TodosService {
   update(id: string, updateTodoDto: UpdateTodoDto) {
     const todo = this.todos.find((todo) => todo.id === id);
     Object.assign(todo, updateTodoDto);
+    return todo;
   }
 
   remove(id: string) {
@@ -32,5 +33,6 @@ export class TodosService {
       throw new NotFoundException('Cannot delete: todo not found');
     }
     this.todos.splice(index, 1);
+    return true;
   }
 }

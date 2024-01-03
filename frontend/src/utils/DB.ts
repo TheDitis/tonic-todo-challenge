@@ -112,4 +112,18 @@ export class DB {
     console.log('created todo: ', todo);
     return todo as Todo;
   }
+
+  static async updateTodo(partialTodo: Todo) {
+    const todo = await DB.mutate(
+      ['todos', partialTodo.id],
+      'PATCH',
+      partialTodo,
+    );
+    return todo as Todo;
+  }
+
+  static async deleteTodo(id: string) {
+    const todo = await DB.mutate(['todos', id], 'DELETE', {});
+    return todo as Todo;
+  }
 }

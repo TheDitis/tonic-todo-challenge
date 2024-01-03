@@ -17,9 +17,23 @@ export const useTodos = () => {
     onSuccess: () => refetch(),
   });
 
+  const { mutate: updateTodo } = useMutation({
+    mutationKey: ['todos'],
+    mutationFn: DB.updateTodo,
+    onSuccess: () => refetch(),
+  });
+
+  const { mutate: deleteTodo } = useMutation({
+    mutationKey: ['todos'],
+    mutationFn: DB.deleteTodo,
+    onSuccess: () => refetch(),
+  });
+
   return {
     todos,
     createTodo,
+    updateTodo,
+    deleteTodo,
     error,
   };
 };
