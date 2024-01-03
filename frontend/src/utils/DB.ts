@@ -6,7 +6,39 @@ export class DB {
   static readonly endpoint = 'http://localhost:8000';
 
   // normally I would use an auth provider or at least a JWT, but there's no time
-  static user_id: string | null = '4845adf3-0220-469f-ace0-e8a441fdb8a5';
+  static userId: string | null = localStorage.getItem('userId');
+
+  static async login(username: string) {
+    return await DB.auth(username, 'login');
+  }
+
+  static async signup(username: string) {
+    return await DB.auth(username, 'signup');
+  }
+
+  private static async auth(username: string, kind: 'login' | 'signup') {
+    const user = await (kind === 'login'
+      ? await DB.get(['users', 'name', username])
+      : DB.call(['users'], 'POST', { username }));
+    if (!user) {
+      throw new Error('User not found');
+    }
+    DB.userId = user.id;
+    localStorage.setItem('userId', user.id);
+    return user as User;
+  }
+
+  static async logout() {
+    DB.userId = null;
+    localStorage.removeItem('userId');
+  }
+
+  static async loadAuth() {
+    if (DB.userId) {
+      return (await DB.get(['users', DB.userId])) as User;
+    }
+    return null;
+  }
 
   private static async call(
     path: string | string[],
@@ -53,10 +85,10 @@ export class DB {
   }
 
   static async getTodos() {
-    if (!DB.user_id) {
+    if (!DB.userId) {
       throw new Error('User not logged in');
     }
-    const todos = await DB.get(['todos', DB.user_id]);
+    const todos = await DB.get(['todos', DB.userId]);
     console.log('got todos: ', todos);
     return todos as Todo[];
   }

@@ -24,6 +24,10 @@ export class UsersService {
     return this.users;
   }
 
+  findOneByUsername(userName: string) {
+    return this.users.find((user) => user.username === userName);
+  }
+
   findOne(id: string) {
     return this.users.find((user) => user.id === id);
   }
