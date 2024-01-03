@@ -20,9 +20,9 @@ export class TodosController {
     return this.todosService.create(createTodoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.todosService.findAll();
+  @Get(':userId')
+  findAll(@Param('userId') userId: string) {
+    return this.todosService.findAll(userId);
   }
 
   @Get(':id')

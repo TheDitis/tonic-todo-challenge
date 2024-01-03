@@ -8,15 +8,13 @@ export class TodosService {
   todos: Todo[] = [];
 
   create(createTodoDto: CreateTodoDto) {
-    const todo = new Todo();
-    todo.text = createTodoDto.text;
-    todo.completed = false;
+    const todo = new Todo(createTodoDto);
     this.todos.push(todo);
     return todo;
   }
 
-  findAll() {
-    return `This action returns all todos`;
+  findAll(userId: string) {
+    return this.todos.filter((todo) => todo.userId === userId);
   }
 
   findOne(id: string) {
