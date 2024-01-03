@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { AuthPage } from './AuthPage/AuthPage';
 import { TodoList } from './TodoList/TodoList';
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<TodoList />} />
-        {/* TODO: <Route path="/auth" element={<AuthPage/>}/>*/}
+        <Route path="/auth" element={<AuthPage />} />
       </Routes>
     </div>
   );
